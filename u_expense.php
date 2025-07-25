@@ -172,25 +172,6 @@ if($msg=="exist"){?>
                                     <h4 class="header-title">Daftar Pengeluaran</h4>
                                     
                                 </div>
-
-
-                                     <div class="col-lg-4 col-xs-4">                           
-                                                                     
-                                                     <div class="form-group row">
-                                                          
-                                                           <form method=get>
-                                                                <div class="input-group">
-                                                                    <input type="text" class="form-control" placeholder="Cari" name="q">
-                                                                    <div class="input-group-append">
-                                                                        <button class="btn btn-dark waves-effect waves-light" type="button"><i class="fas fa-search"></i></button>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
-                                                            
-                                                        </div>                
-                                  
-                                    </div>
-
                                 </div>
 
                          <?php
@@ -241,10 +222,7 @@ if($msg=="exist"){?>
                                                
                                                 <td><?php echo number_format($row['jumlah']);?></td>
                                                  <td><?php echo $row['kasir'];?></td>
-                                                 <td><?php $sql=mysqli_query($conn,"SELECT * FROM uang_kategori WHERE kategori_id = kategori_id");
-                                                            while ($row=mysqli_fetch_assoc($sql))
-                                                            echo "<option value='".$row['kategori_id']."'>".$row['nama']."</option>";
-                                                            echo $row['no']?></td>
+                                                 <td><?php echo $row['kategori_id'];?></td>
                                                  <td>
                                                    <?php  if ($chmod >= 4 || $_SESSION['jabatan'] == 'admin') { ?>
                                                      <a href="u_edit?q=<?php echo $row['no'];?>&ref=u_expense" class="btn btn-icon waves-effect waves-light btn-purple"> <i class="fa fa-edit"></i> </a>

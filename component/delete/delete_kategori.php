@@ -19,14 +19,14 @@ if( $chmod == '4' || $chmod == '5' || $_SESSION['jabatan'] =='admin' || $_SESSIO
  if (mysqli_query($conn, $sql)) {
  ?>
 
-  <body onload="setTimeout(function() { document.frm1.submit() }, 10)">
+  <body onload="setTimeout(function() { document.frm1.submit() }, 100)">
   <form action="<?php echo $baseurl; ?>/<?php echo $forwardpage;?>" name="frm1" method="post">
 
   <input type="hidden" name="hapusberhasil" value="1" />
 
 <?php
  } else{
- ?>   <body onload="setTimeout(function() { document.frm1.submit() }, 10)">
+ ?>   <body onload="setTimeout(function() { document.frm1.submit() }, 100)">
     <input type="hidden" name="hapusberhasil" value="2" />
  <?php
  }

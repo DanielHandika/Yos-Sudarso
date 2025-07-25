@@ -14,7 +14,7 @@ include 'configuration/config_connect.php';
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
-                            &copy;2025 BiSa Finance Modified By <a href="https://danielhandika.github.io/" target=_blank>Daniel Handika</a>
+                            &copy;2025 BiSa Finance Modified By <a href="#">Yos Sudarso Bandar Jaya</a>
                             </div>
                           
                         </div>

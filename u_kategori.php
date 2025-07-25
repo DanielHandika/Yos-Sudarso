@@ -235,8 +235,11 @@ if($msg=="exist"){?>
 
                                                        <button class="demo-delete-row btn btn-danger btn-sm btn-icon" 
                                                 onclick="window.location.href='component/delete/delete_kategori?no=<?php echo $row['kategori_id'].'&'; ?>forward=<?php echo "uang_kategori".'&';?>forwardpage=<?php echo $halaman.'&'; ?>chmod=<?php echo $chmod; ?>'"
+                                                
 
                                                 ><i class="fa fa-times"></i></button>
+                                                <button class="demo-delete-row btn btn-danger btn-sm btn-icon" 
+                                                onclick="window.location.href='component/delete/delete_biasa?no=<?php echo $fill['no'].'&'; ?>forward=<?php echo "user".'&';?>forwardpage=<?php echo $halaman.'&'; ?>chmod=<?php echo $chmod; ?>'"</button>
                                                  </td>
 
                                                  <tr>

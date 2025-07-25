@@ -47,9 +47,7 @@ $msg=$_GET['msg'];
                             <div class="account-box">
                                 <div class="account-logo-box">
                                     <div class="text-center">
-                                        <a href="index.html">
                                             <img src="<?php echo $sql['avatar'];?>" alt="" height="100">
-                                        </a>
                                     </div>
 
                                         <?php if($msg!=''){?>

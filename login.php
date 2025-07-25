@@ -50,7 +50,7 @@ $msg=$_GET['msg'];
 
                 <div class="col-md-6">
                     <a href="login_admin">
-                    <div class="card-box">
+                    <div class="card-box masuk-box">
                         
                         <div class="row">
                             <div class="col-4">
@@ -67,7 +67,13 @@ $msg=$_GET['msg'];
                                 filter: brightness(80%);
 
                             }
-                        
+                            
+                            .keluar-box:hover {
+                                filter: brightness(100%);
+                                background-color: red;
+                                transition: all 0.4s ease;
+                                color: white;
+                            }
 
                         </style>
                     </div>
@@ -89,6 +95,24 @@ $msg=$_GET['msg'];
                         <h2>Login Siswa</h2>
                     </div>
                     </div>
+                        
+                    </div>
+                </a>
+                </div>
+                
+                
+                <div class="col-md-4 pt-5">
+                    <a href="jenjang">
+                    <div class="card-box keluar-box">
+                        
+                    <div class="row">
+        
+                    </div>
+                        <div class="text-center ">
+                        <h2>Kembali</h2>
+                    </div>
+                    </div>
+                    
                         
                     </div>
                 </a>
