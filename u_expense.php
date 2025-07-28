@@ -178,74 +178,75 @@ if($msg=="exist"){?>
               error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
               $q=$_GET['q'];
               if ($q!='' || $q !=null){
-               $sql    = "SELECT * from uang_masuk_keluar, uang_kategori WHERE  tipe='out' AND nama like '%$q%' or keterangan like '%$q%' order by tgl_input desc";
+               // Query pencarian juga harus melakukan JOIN
+               $sql = "SELECT umk.*, uk.nama_kategori FROM uang_masuk_keluar AS umk INNER JOIN uang_kategori AS uk ON umk.kategori_id = uk.kategori_id WHERE umk.tipe='out' AND (umk.nama LIKE '%$q%' OR umk.keterangan LIKE '%$q%') ORDER BY umk.tgl_input DESC";
              }
-              else {
-                $sql    = "select * from uang_masuk_keluar WHERE tipe='out' order by tgl_input desc";
+             else {
+               // Query utama juga harus melakukan JOIN
+               $sql = "SELECT umk.*, uk.nama_kategori FROM uang_masuk_keluar AS umk INNER JOIN uang_kategori AS uk ON umk.kategori_id = uk.kategori_id WHERE umk.tipe='out' ORDER BY umk.tgl_input DESC";
              }
-               $result = mysqli_query($conn, $sql);
-               $rpp    = 15;
-               $reload = "$halaman"."?pagination=true";
-               $page   = intval(isset($_GET["page"]) ? $_GET["page"] : 0);
+             
+             $result = mysqli_query($conn, $sql) or die ("Error pada query utama: " . mysqli_error($conn));
+             $rpp = 15;
+             $reload = "$halaman"."?pagination=true";
+             $page = intval(isset($_GET["page"]) ? $_GET["page"] : 0);
 
-               if ($page <= 0)
-               $page = 1;
-               $tcount  = mysqli_num_rows($result);
-               $tpages  = ($tcount) ? ceil($tcount / $rpp) : 1;
-               $count   = 0;
-               $i       = ($page - 1) * $rpp;
-               $no_urut = ($page - 1) * $rpp;
-               ?>
+             if ($page <= 0)
+             $page = 1;
+             $tcount = mysqli_num_rows($result);
+             $tpages = ($tcount) ? ceil($tcount / $rpp) : 1;
+             $count = 0;
+             $i = ($page - 1) * $rpp;
+             $no_urut = ($page - 1) * $rpp;
+             ?>
 
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped mb-0">
-                                            <thead>
-                                            <tr>
-                                               <th style="width:10px">No.</th>
-                                                 <th>Tanggal</th>
-                                                 <th>Nama</th>
-                                                  <th>Jumlah(Rp)</th>
-                                                   <th>Oleh</th>
-                                                   <th>Kategori</th>
-                                                   <th>Opsi</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                  <?php        while(($count<$rpp) && ($i<$tcount)) {
-               mysqli_data_seek($result,$i);
-               $row = mysqli_fetch_array($result);
-               ?> 
-                                            <tr>
-                                                <td><?php echo ++$nom;?></td>
-                                                 <td><?php echo date('d/m/y',strtotime($row['tgl_update']));?></td>
-                                                <td><?php echo $row['nama'];?></td>
-                                               
-                                                <td><?php echo number_format($row['jumlah']);?></td>
-                                                 <td><?php echo $row['kasir'];?></td>
-                                                 <td><?php echo $row['kategori_id'];?></td>
-                                                 <td>
-                                                   <?php  if ($chmod >= 4 || $_SESSION['jabatan'] == 'admin') { ?>
-                                                     <a href="u_edit?q=<?php echo $row['no'];?>&ref=u_expense" class="btn btn-icon waves-effect waves-light btn-purple"> <i class="fa fa-edit"></i> </a>
+                                         <div class="table-responsive">
+                                            <table class="table table-bordered table-striped mb-0">
+                                                <thead>
+                                                <tr>
+                                                   <th style="width:10px">No.</th>
+                                                    <th>Tanggal</th>
+                                                    <th>Nama</th>
+                                                     <th>Jumlah(Rp)</th>
+                                                     <th>Oleh</th>
+                                                     <th>Kategori</th>
+                                                     <th>Opsi</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                             <?php        while(($count<$rpp) && ($i<$tcount)) {
+                                mysqli_data_seek($result,$i);
+                                $row = mysqli_fetch_array($result);
+                                ?> 
+                                                 <tr>
+                                                     <td><?php echo ++$nom;?></td>
+                                                     <td><?php echo date('d/m/y',strtotime($row['tgl_update']));?></td>
+                                                     <td><?php echo htmlspecialchars($row['nama']);?></td>
+                                                     <td><?php echo number_format($row['jumlah']);?></td>
+                                                     <td><?php echo htmlspecialchars($row['kasir']);?></td>
+                                                     <td><?php echo htmlspecialchars($row['nama_kategori']);?></td>
+                                                     <td>
+                                                          <?php  if ($chmod >= 4 || $_SESSION['jabatan'] == 'admin') { ?>
+                                                            <a href="u_edit?q=<?php echo $row['no'];?>&ref=u_expense" class="btn btn-icon waves-effect waves-light btn-purple"> <i class="fa fa-edit"></i> </a>
 
-                                                         <?php } ?>
+                                                               <?php } ?>
 
-                                               <?php  if ($chmod >= 5 || $_SESSION['jabatan'] == 'admin') { ?>
+                                                         <?php  if ($chmod >= 5 || $_SESSION['jabatan'] == 'admin') { ?>
 
-                                                       
-                                                       <button class="demo-delete-row btn btn-danger btn-icon" 
-                                                onclick="window.location.href='component/delete/delete_biasa?no=<?php echo $row['no'].'&'; ?>forward=<?php echo "uang_masuk_keluar".'&';?>forwardpage=<?php echo $halaman.'&'; ?>chmod=<?php echo $chmod; ?>'"
+                                                                <button class="demo-delete-row btn btn-danger btn-icon" 
+                                                          onclick="window.location.href='component/delete/delete_biasa?   no=<?php echo $row['no'].'&'; ?>forward=<?php echo "uang_masuk_keluar".'&';?>forwardpage=<?php echo $halaman.'&'; ?>chmod=<?php echo $chmod; ?>'"
 
-                                                ><i class="fa fa-times"></i></button>
+                                                          ><i class="fa fa-times"></i></button>
 
 
-                                                      <?php } ?>  
+                                                            <?php } ?>    
 
-                                                 </td>
-                                            </tr>
-                     <?php
-               $i++;
-               $count++;
-               } ?>
+                                                     </td>
+                                                 </tr>
+                                     <?php
+                                $i++;
+                                $count++;
+                                } ?>
                                             </tbody>
                                         </table>
                                         <div align="right"><?php if($tcount>=$rpp){ echo paginate_one($reload, $page, $tpages);}else{} ?></div>
@@ -308,13 +309,12 @@ if($msg=="exist"){?>
                                                                    <select class="form-control" data-toggle="select2" style="width: 100%;" name="kate" id="kate">
                                                               
                                           <?php
-                                    $sql=mysqli_query($conn,"select * from uang_kategori where jenis='out'");
-                                    
+                                    $sql=mysqli_query($conn,"select * from uang_kategori where jenis='out' order by nama_kategori asc");
                                     while ($row=mysqli_fetch_assoc($sql)){
-                                      if ($kategori==$row['nama'])
-                                      echo "<option value='".$row['kategori_id']."' selected='selected'>".$row['nama']."</option>";
+                                      if ($kategori==$row['nama_kategori'])
+                                      echo "<option value='".$row['kategori_id']."' selected='selected'>".$row['nama_kategori']."</option>";
                                       else
-                                      echo "<option value='".$row['kategori_id']."'>".$row['nama']."</option>";
+                                      echo "<option value='".$row['kategori_id']."'>".$row['nama_kategori']."</option>";
                                     }
                                   ?>
                                   
@@ -329,15 +329,7 @@ if($msg=="exist"){?>
                                                         </div>
                                                     </div>
 
-                                                      <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="field-3" class="control-label">Keterangan</label>
-                                                                <input type="text" class="form-control" id="field-3" name="ket" required autocomplete="off">
-                                                              
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                      
 
                                                        
                                                   
