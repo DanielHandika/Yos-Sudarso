@@ -162,7 +162,7 @@ if($msg=="exist"){?>
 
                                          <div class="form-group">
                                                 <label for="exampleInputPassword1">Nama Kategori</label>
-                                                <input type="text" class="form-control" name="nama" value="<?php echo $a['nama'];?>">
+                                                <input type="text" class="form-control" name="nama_kategori" value="<?php echo $a['nama_kategori'];?>">
                                             </div>
 
                                              <div class="form-group">
@@ -213,7 +213,7 @@ if($msg=="exist"){?>
 
                             echo '  <tr>
                                     <td>'.++$nom.'</td>
-                                    <td>'.$row['nama'].'</td>';
+                                    <td>'.$row['nama_kategori'].'</td>';
                              if($row['jenis']=='out'){;
                              echo   ' <td>Pengeluaran</td>'; } 
 
@@ -221,9 +221,7 @@ if($msg=="exist"){?>
                               echo       '<td>Pemasukan</td>'; }
 
                               echo    ' <td>'.$row['keterangan'].'</td>';
-                            
-                              
-                            echo    ' <td>'.$row['kategori_id'].'</td>';
+                            echo    ' <td>'.$row['nama_kategori'].'</td>';
                             ?>
                    
                             <td>
@@ -238,8 +236,7 @@ if($msg=="exist"){?>
                                                 
 
                                                 ><i class="fa fa-times"></i></button>
-                                                <button class="demo-delete-row btn btn-danger btn-sm btn-icon" 
-                                                onclick="window.location.href='component/delete/delete_biasa?no=<?php echo $fill['no'].'&'; ?>forward=<?php echo "user".'&';?>forwardpage=<?php echo $halaman.'&'; ?>chmod=<?php echo $chmod; ?>'"</button>
+                                                
                                                  </td>
 
                                                  <tr>
@@ -311,13 +308,13 @@ right();
 if(isset($_POST['simpan'])){
    if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-    $nama = mysqli_real_escape_string($conn, $_POST["nama"]);
+    $nama = mysqli_real_escape_string($conn, $_POST["nama_kategori"]);
      $j = mysqli_real_escape_string($conn, $_POST["jenis"]);
       $k = mysqli_real_escape_string($conn, $_POST["ket"]);
        $no = mysqli_real_escape_string($conn, $_POST["no"]);
   
 if($no!=''){
-    $sql1="UPDATE uang_kategori SET nama='$nama',jenis='$j',keterangan='$k' WHERE kategori_id='$no'";
+    $sql1="UPDATE uang_kategori SET nama_kategori='$nama',jenis='$j',keterangan='$k' WHERE kategori_id='$no'";
 
     if(mysqli_query($conn,$sql1)){
         echo "<script type='text/javascript'>window.location = '$forwardpage?insert=update';</script>";
@@ -327,7 +324,7 @@ if($no!=''){
 
 } else {
 
-    $sql2=mysqli_query($conn,"SELECT * FROM uang_kategori WHERE nama='$nama'");
+    $sql2=mysqli_query($conn,"SELECT * FROM uang_kategori WHERE nama_kategori='$nama'");
 
     if(mysqli_num_rows($sql2)>0){
           echo "<script type='text/javascript'>window.location = '$forwardpage?insert=exist';</script>";
