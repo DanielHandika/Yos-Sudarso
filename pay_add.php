@@ -152,7 +152,7 @@ if(mysqli_num_rows($sq)>0){
 
 $sql1=mysqli_fetch_assoc($sq);
 $k=$sql1['kelas_id'];
-$id=$sql1['student_id'];
+$id=$sql1['student_id']; // student_id yang benar sudah ada di sini
 
 $sql2=mysqli_fetch_assoc(mysqli_query($conn,"SELECT * FROM periode WHERE no='$periode'"));
 
@@ -174,7 +174,7 @@ $trimmed = str_replace($search, '', $subject) ;
                             <!-- Kolom Foto Siswa -->
                             <div class="col-lg-3 col-md-4 col-12">
                                 <div class="card-box text-center">
-                                     <img src="student/<?php echo $trimmed;?>" alt="image" class="img-fluid rounded" width="250"/>
+                                     <img src="student/<?php echo $trimmed;?>" alt="Foto Murid" class="img-fluid rounded" width="250"/>
                                 </div>
                             </div>
 
@@ -215,6 +215,10 @@ $trimmed = str_replace($search, '', $subject) ;
                                         </table>
                                     </div>
                                     <br>
+                                    
+                                    <!-- PERBAIKAN DI SINI: Menggunakan $sql1['student_id'] -->
+                                    <a href="m_student_detail?id=<?php echo $sql1['student_id'];?>" class="btn btn-primary waves-effect width-md waves-light mr-2">Lihat Profile Murid</a>
+
                                     <a href="pay_statement?t=<?php echo $periode;?>&id=<?php echo $id;?>" class="btn btn-warning waves-effect width-md waves-light">CETAK SEMUA TAGIHAN</a>
                                 </div>
                             </div>
@@ -246,7 +250,7 @@ $trimmed = str_replace($search, '', $subject) ;
                                                   <tr>
                                                       <th scope="row"><?php echo ++$nom;?></th>
                                                       <td><?php $jen=$fill['jenis_id'];
-                                                      $y=mysqli_fetch_assoc(mysqli_query($conn,"SELECT * FROM jenis_bayar WHERE jenis_id='$jen'"));
+                                                      $y=mysqli_fetch_assoc(mysqli_query($conn,"SELECT nama,tahunajar FROM jenis_bayar WHERE jenis_id='$jen'"));
                                                           echo $y['nama'] ." - TA ". $y['tahunajar'];?>
                                                       </td>
                                                       <td><?php echo number_format($fill['bulanan_bill']);?></td>
@@ -281,7 +285,7 @@ $trimmed = str_replace($search, '', $subject) ;
                                           <tr>
                                               <th scope="row"><?php echo ++$nom;?></th>
                                               <td><?php $jen=$fill['jenis_id'];
-                                              $y=mysqli_fetch_assoc(mysqli_query($conn,"SELECT * FROM jenis_bayar WHERE jenis_id='$jen'"));
+                                              $y=mysqli_fetch_assoc(mysqli_query($conn,"SELECT nama,tahunajar FROM jenis_bayar WHERE jenis_id='$jen'"));
                                                   echo $y['nama'] ." - TA ". $y['tahunajar'];?>
                                               </td>
                                               <td><?php echo number_format($fill['bill']);?></td>
