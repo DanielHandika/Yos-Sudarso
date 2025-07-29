@@ -230,8 +230,8 @@ $nom=1;
                                             } ?>
                                                 </td>
                                                 <td><?php $kat=$row['kategori_id'];
-                                                $d=mysqli_fetch_assoc(mysqli_query($conn,"SELECT nama FROM uang_kategori WHERE kategori_id='$kat'"));
-                                                echo $d['nama'];?>
+                                                $d=mysqli_fetch_assoc(mysqli_query($conn,"SELECT nama_kategori FROM uang_kategori WHERE kategori_id='$kat'"));
+                                                echo $d['nama_kategori'];?>
 
                                                 </td>
                                                 
@@ -276,9 +276,9 @@ $nom=1;
                                             } ?>
                                                 </td>
                                                 <td><?php $kat=$row['kategori_id'];
-                                                $d=mysqli_fetch_assoc(mysqli_query($conn,"SELECT nama FROM uang_kategori WHERE kategori_id='$kat'"));
+                                                $d=mysqli_fetch_assoc(mysqli_query($conn,"SELECT nama_kategori FROM uang_kategori WHERE kategori_id='$kat'"));
                                                 if ($d) {
-                                                    echo $d['nama'];
+                                                    echo $d['nama_kategori'];
                                                 } else {
                                                     echo " <strong>Kategori tidak di Temukan!</strong>";
                                                 } ?>
