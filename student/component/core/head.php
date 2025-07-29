@@ -2,7 +2,7 @@
 <?php
 error_reporting(0);
 include 'configuration/config_connect.php';
-       $themes=1;
+       $themes=2;
 if($themes == '2'){?>
 <!--DARK-->
     <link href="../assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
