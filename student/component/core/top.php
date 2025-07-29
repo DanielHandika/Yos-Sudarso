@@ -66,7 +66,7 @@ $trimmed = str_replace($search, '', $subject) ;
             </span>
             <span class="logo-sm">
                 <!-- <span class="logo-sm-text-dark">U</span> -->
-                <img src="<?php echo $sql['avatar'];?>" alt="" height="28">
+                <img src="./image/logo.png" alt="" height="28">
             </span>
         </a>
     </div>
