@@ -158,9 +158,9 @@ if($msg=="false"){?>
                                     $sql=mysqli_query($conn,"select * from uang_kategori where jenis='$jenis'");
                                     while ($row=mysqli_fetch_assoc($sql)){
                                       if ($a['kategori_id']==$row['kategoori_id'])
-                                      echo "<option value='".$row['kategori_id']."' selected='selected'>".$row['nama']."</option>";
+                                      echo "<option value='".$row['kategori_id']."' selected='selected'>".$row['nama_kategori']."</option>";
                                       else
-                                      echo "<option value='".$row['kategori_id']."'>".$row['nama']."</option>";
+                                      echo "<option value='".$row['kategori_id']."'>".$row['nama_kategori']."</option>";
                                     }
                                   ?>
                                
