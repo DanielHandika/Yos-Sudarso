@@ -157,6 +157,7 @@ $trimmed = str_replace($search, '', $subject) ;
                                                 <p class="text-muted mb-0"><small><?php echo $a['nis'];?></small></p>
                                             </div>
                                         </div>
+                                        <?php  if ($chmod >= 3 || $_SESSION['jabatan'] == 'admin') { ?>
                                         <div class="col-sm-6">
                                             <div class="text-right">
                                                 <a href="m_student_add?id=<?php echo $no;?>" class="btn btn-success waves-effect waves-light">
@@ -164,6 +165,7 @@ $trimmed = str_replace($search, '', $subject) ;
                                                 </a>
                                             </div>
                                         </div>
+                                        <?php } ?>
                                     </div>
                                 </div>
                                 <!--/ meta -->
