@@ -76,7 +76,7 @@ $a4=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(sudahbayar) as paid FROM b
 $a34=$a3['paidbill']+$a4['paid'];
 
 $a5=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(bulanan_bill) as due FROM bulanan WHERE period_id='$t' AND bulanan_status LIKE '%belum%' AND student_id='$id' AND month_id<='$mon'"));
-$a6=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(bill) as unpaid FROM bebasan WHERE student_id='$id' AND status='belum'"));
+$a6=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(bill - sudahbayar) as unpaid FROM bebasan WHERE student_id='$id' AND status='belum'"));
 
 ?>
 
@@ -176,7 +176,7 @@ $a6=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(bill) as unpaid FROM bebas
                                         </div>
 
                                         <div class="wigdet-two-content media-body">
-                                            <p class="m-0 text-uppercase font-weight-medium text-truncate" title="Statistics">Sisa Tagihan Lain</p>
+                                            <p class="m-0 text-uppercase font-weight-medium text-truncate" title="Statistics">Tagihan Non-Bulanan</p>
                                             <h3 class="font-weight-medium my-2"><span data-plugin="counterup"><?php echo number_format($a6['unpaid']);?></span></h3>
                                            
                                         </div>
