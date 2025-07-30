@@ -159,21 +159,21 @@ $sqlb=mysqli_fetch_assoc(mysqli_query($conn,"SELECT * FROM student WHERE student
 
                                          <div class="form-group">
                                                 <label for="exampleInputPassword1">Nama Pembayaran</label>
-                                                <input type="text" class="form-control" name="namapr" value="<?php echo $sqla['nama'] ." T.A ". $sqla['tahunajar'];?>" readonly>
+                                                <input type="text" class="form-control" name="namapr" value="<?php echo $sqla['nama'] ." T.A ". $sqla['tahunajar'];?>" disabled>
                                             </div>
 
                                              <div class="form-group">
                                                 <label for="exampleInputPassword1">Siswa</label>
-                                                <input type="text" class="form-control" value="<?php echo $sqlb['nama'];?>" readonly>
+                                                <input type="text" class="form-control" value="<?php echo $sqlb['nama'];?>" disabled>
                                             </div>
 
                                              <div class="form-group">
                                                 <label for="exampleInputPassword1">Jumlah Tagihan</label>
-                                                <input type="text" class="form-control" value="<?php echo $sql['bulanan_bill'];?>" id="tagih" name="tagih" readonly>
-                                                 <input type="hidden" class="form-control" name="no" value="<?php echo $no;?>" readonly>
-                                                  <input type="hidden" class="form-control" name="t" value="<?php echo $t;?>" readonly>
-                                                   <input type="hidden" class="form-control" name="s" value="<?php echo $sqlb['nis'];?>" readonly>
-                                                    <input type="hidden" class="form-control" name="stu" value="<?php echo $s;?>" readonly>
+                                                <input type="text" class="form-control" value="<?php echo $sql['bulanan_bill'];?>" id="tagih" name="tagih" disabled>
+                                                 <input type="hidden" class="form-control" name="no" value="<?php echo $no;?>" disabled>
+                                                  <input type="hidden" class="form-control" name="t" value="<?php echo $t;?>" disabled>
+                                                   <input type="hidden" class="form-control" name="s" value="<?php echo $sqlb['nis'];?>" disabled>
+                                                    <input type="hidden" class="form-control" name="stu" value="<?php echo $s;?>" disabled>
                                             </div>
 
                                              <div class="form-group">
@@ -254,29 +254,29 @@ $sisa=$sql['bill']-$sql['sudahbayar'];
 
                                          <div class="form-group">
                                                 <label for="exampleInputPassword1">Nama Pembayaran</label>
-                                                <input type="text" class="form-control" name="namapr" value="<?php echo $sqla['nama'] ." T.A ". $sqla['tahunajar'];?>" readonly>
+                                                <input type="text" class="form-control" name="namapr" value="<?php echo $sqla['nama'] ." T.A ". $sqla['tahunajar'];?>" disabled>
                                             </div>
 
                                              <div class="form-group">
                                                 <label for="exampleInputPassword1">Siswa</label>
-                                                <input type="text" class="form-control" value="<?php echo $sqlb['nama'];?>" readonly>
-                                                <input type="hidden" class="form-control" name="stu" value="<?php echo $s;?>" readonly>
+                                                <input type="text" class="form-control" value="<?php echo $sqlb['nama'];?>" disabled>
+                                                <input type="hidden" class="form-control" name="stu" value="<?php echo $s;?>" disabled>
                                             </div>
 
                                              <div class="form-group">
                                                 <label for="exampleInputPassword1">Tagihan</label>
-                                                <input type="text" class="form-control" id="tagihan" value="<?php echo ($sql['bill']);?>" name="bill" readonly>
-                                                <input type="hidden" class="form-control" name="no" value="<?php echo $no;?>" readonly>
+                                                <input type="text" class="form-control" id="tagihan" value="<?php echo ($sql['bill']);?>" name="bill" disabled>
+                                                <input type="hidden" class="form-control" name="no" value="<?php echo $no;?>" disabled>
 
-                                                  <input type="hidden" class="form-control" name="t" value="<?php echo $t;?>" readonly>
-                                                   <input type="hidden" class="form-control" name="s" value="<?php echo $sqlb['nis'];?>" readonly>
+                                                  <input type="hidden" class="form-control" name="t" value="<?php echo $t;?>" disabled>
+                                                   <input type="hidden" class="form-control" name="s" value="<?php echo $sqlb['nis'];?>" disabled>
 
-                                                   <input type="hidden" class="form-control" name="sisa" value="<?php echo $sisa;?>" readonly>
+                                                   <input type="hidden" class="form-control" name="sisa" value="<?php echo $sisa;?>" disabled>
                                             </div>
 
                                               <div class="form-group">
                                                 <label for="exampleInputPassword1">Sudah Dibayarkan</label>
-                                                <input type="text" class="form-control" id="paid" value="<?php echo $sql['sudahbayar'];?>" name="sudah" readonly>
+                                                <input type="text" class="form-control" id="paid" value="<?php echo $sql['sudahbayar'];?>" name="sudah" disabled>
                                                  
                                             </div>
 
@@ -284,7 +284,7 @@ $sisa=$sql['bill']-$sql['sudahbayar'];
 
                                              <div class="form-group">
                                                 <label for="exampleInputPassword1">Jumlah Bayar</label>
-                                                <input type="text" class="form-control" id="dibayar" name="dibayar" autocomplete="off">
+                                                <input type="text" class="form-control" id="dibayar" name="dibayar" autocomplete="off" >
                                             </div>
 
                                             <button type="submit" name="save" class="btn btn-block btn-success waves-effect width-md waves-light">SIMPAN</button>
