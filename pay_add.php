@@ -416,7 +416,7 @@ $trimmed = str_replace($search, '', $subject) ;
                                                         <td><?php echo number_format($rowa['bill']);?></td>
                                                             <td><?php echo number_format($rowa['sudahbayar']);?></td>
                                                             <?php if($rowa['status']!='belum'){?>
-                                                            <td class="table-danger"><?php echo $rowa['status'];?></td>
+                                                            <td class="table-success" style="color: black;"><?php echo $rowa['status'];?></td>
                                                         <?php } else {?>
                                                                 <td ><?php echo $rowa['status'];?></td>
                                                         <?php } ?>
