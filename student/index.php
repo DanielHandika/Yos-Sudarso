@@ -22,7 +22,6 @@ include "configuration/config_all_stat.php";
 <?php
 
 head();
-
 session();
 connect();
 
@@ -122,7 +121,7 @@ $a6=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(bill) as unpaid FROM bebas
                                 <div class="card-box widget-box-two widget-two-custom">
                                     <div class="media">
                                         <div class="avatar-lg rounded-circle bg-warning widget-two-icon align-self-center">
-                                            <i class="mdi mdi-account-multiple avatar-title font-30 text-white"></i>
+                                            <i class="mdi mdi-cash avatar-title font-30 text-white"></i>
                                         </div>
 
                                         <a href="summary.php" class="wigdet-two-content media-body">
@@ -172,8 +171,8 @@ $a6=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(bill) as unpaid FROM bebas
                             <div class="col-xl-3 col-sm-6">
                                 <div class="card-box widget-box-two widget-two-custom ">
                                     <div class="media">
-                                        <div class="avatar-lg rounded-circle bg-info widget-two-icon align-self-center">
-                                            <i class="mdi mdi-auto-fix  avatar-title font-30 text-white"></i>
+                                        <div class="avatar-lg rounded-circle bg-warning widget-two-icon align-self-center">
+                                            <i class="mdi mdi-cash  avatar-title font-30 text-white"></i>
                                         </div>
 
                                         <div class="wigdet-two-content media-body">
@@ -307,7 +306,6 @@ $trimmed = str_replace($search, '', $subject) ;
                     </div> <!-- end container-fluid -->
 
                 </div> <!-- end content -->
-
 
 
                <!--FOOTER-->
