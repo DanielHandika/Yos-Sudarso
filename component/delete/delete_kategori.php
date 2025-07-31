@@ -1,63 +1,62 @@
 <?php
+// File: component/delete/delete_kategori.php
+
+// Selalu mulai session untuk memeriksa login
+
+// Include file-file konfigurasi yang diperlukan
+// Include file-file konfigurasi yang diperlukan
 include "../../configuration/config_connect.php";
 include "../../configuration/config_session.php";
-include "../../configuration/config_chmod.php";
+// config_chmod.php tidak lagi diperlukan di sini karena kita dapatkan dari URL
+// include "../../configuration/config_chmod.php"; 
 include "../../configuration/config_etc.php";
-$forward =$_GET['forward'];
-$no = $_GET['no'];
-$chmod = 5;
-$forwardpage = $_GET['forwardpage'];
-?>
-<link href="../../assets/libs/spinkit/spinkit.css" rel="stylesheet" type="text/css" >
-                                   
 
+// Cek status login dulu
+// if (!login_check()) 
 
-<?php
-if( $chmod == '4' || $chmod == '5' || $_SESSION['jabatan'] =='admin' || $_SESSION['jabatan'] == 'guru'){
+// Ambil parameter dari URL dengan aman
+$forward = isset($_GET['forward']) ? $_GET['forward'] : '';
+$no = isset($_GET['no']) ? (int)$_GET['no'] : 0;
+$forwardpage = isset($_GET['forwardpage']) ? $_GET['forwardpage'] : 'index.php';
+$chmod_level = isset($_GET['chmod']) ? (int)$_GET['chmod'] : 0; // Ambil level chmod dari URL
 
- $sql = "delete from $forward where kategori_id='".$no."'";
- if (mysqli_query($conn, $sql)) {
- ?>
-
-  <body onload="setTimeout(function() { document.frm1.submit() }, 100)">
-  <form action="<?php echo $baseurl; ?>/<?php echo $forwardpage;?>" name="frm1" method="post">
-
-  <input type="hidden" name="hapusberhasil" value="1" />
-
-<?php
- } else{
- ?>   <body onload="setTimeout(function() { document.frm1.submit() }, 100)">
-    <input type="hidden" name="hapusberhasil" value="2" />
- <?php
- }
+// Tentukan apakah user punya hak akses
+$has_permission = false;
+if (isset($_SESSION['jabatan']) && ($_SESSION['jabatan'] == 'admin' || $_SESSION['jabatan'] == 'guru')) {
+    $has_permission = true;
+} else if ($chmod_level >= 4) { // Asumsi level 4 bisa edit, 5 bisa hapus. Kita izinkan keduanya.
+    $has_permission = true;
 }
-else{
 
- ?>
-  <body onload="setTimeout(function() { document.frm1.submit() }, 10)">
-   <form action="<?php echo $baseurl; ?>/<?php echo $forwardpage;?>" name="frm1" method="post">
+// Jika tidak punya hak akses, hentikan proses
+if (!$has_permission) {
+    header("Location: ../../" . $forwardpage . "?status=unauthorized");
+    exit();
+}
 
+// Lanjutkan proses hapus jika parameter valid
+if ($no > 0 && !empty($forward)) {
+    
+    // Pastikan $forward adalah nama tabel yang valid untuk keamanan
+    $safe_forward = mysqli_real_escape_string($conn, $forward);
 
-    <input type="hidden" name="hapusberhasil" value="2" />
- <?php
- }
+    // Buat query SQL untuk menghapus data
+    $sql = "DELETE FROM `$safe_forward` WHERE `kategori_id` = $no";
+
+    // Eksekusi query
+    if (mysqli_query($conn, $sql)) {
+        // Jika berhasil, redirect kembali ke halaman utama dengan status sukses
+        header("Location: ../../" . $forwardpage . "?status=deleted");
+        exit();
+    } else {
+        // Jika gagal, redirect kembali dengan status gagal
+        header("Location: ../../" . $forwardpage . "?status=delete_failed");
+        exit();
+    }
+
+} else {
+    // Jika parameter tidak valid (misal: ID tidak ada), redirect kembali
+    header("Location: ../../" . $forwardpage . "?status=invalid_request");
+    exit();
+}
 ?>
-<table width="100%" align="center" cellspacing="0">
-  <tr>
-    <td height="500px" align="center" valign="middle">
-      
-       <div class="sk-wave">
-                                        <div class="sk-rect sk-rect1"></div>
-                                        <div class="sk-rect sk-rect2"></div>
-                                        <div class="sk-rect sk-rect3"></div>
-                                        <div class="sk-rect sk-rect4"></div>
-                                        <div class="sk-rect sk-rect5"></div>
-                                    </div>
-    </td>
-  </tr>
-</table>
-
-
-   </form>
-<meta http-equiv="refresh" content="10;url=jump?forward=<?php echo $forward.'&';?>forwardpage=<?php echo $forwardpage.'&'; ?>chmod=<?php echo $chmod; ?>">
-</body>
