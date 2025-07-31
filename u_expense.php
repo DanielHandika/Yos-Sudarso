@@ -234,7 +234,7 @@ if($msg=="exist"){?>
                                                          <?php  if ($chmod >= 5 || $_SESSION['jabatan'] == 'admin') { ?>
 
                                                                 <button class="demo-delete-row btn btn-danger btn-icon" 
-                                                          onclick="window.location.href='component/delete/delete_biasa?   no=<?php echo $row['no'].'&'; ?>forward=<?php echo "uang_masuk_keluar".'&';?>forwardpage=<?php echo $halaman.'&'; ?>chmod=<?php echo $chmod; ?>'"
+                                                          onclick="window.location.href='component/delete/delete_biasa?no=<?php echo $row['no'].'&'; ?>forward=<?php echo "uang_masuk_keluar".'&';?>forwardpage=<?php echo $halaman.'&'; ?>chmod=<?php echo $chmod; ?>'"
 
                                                           ><i class="fa fa-times"></i></button>
 

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html>
 <?php
 
 // Pastikan file konfigurasi ada dan disertakan
@@ -383,17 +382,15 @@ include "configuration/config_all_stat.php";
         $user = $_SESSION['nama'];
         $now = date('Y-m-d H:i:s'); // Menggunakan H:i:s untuk timestamp yang lebih akurat
 
-        // Perbaikan: tgl_update seharusnya sesuai dengan tgl yang diinput atau tgl saat ini jika tidak ada
-        // Asumsi tgl_update adalah tanggal terakhir kali data diupdate atau dibuat.
-        // Jika tgl_input adalah tanggal pembuatan, maka tgl_update bisa disamakan atau diabaikan jika kolomnya untuk update saja
-        $sql = "INSERT INTO " . $tabeldatabase . " (tipe, nama, keterangan, jumlah, kasir, kategori_id, tgl_transaksi, tgl_input) VALUES ('in', '$nama', '$ket', '$jml', '$user', '$kate', '$tgl', '$now')";
+        // Perbaikan: Mengganti NULL dengan 0 untuk kolom student_id, period_id, dan bebas_id
+        $sql = "INSERT INTO " . $tabeldatabase . " (tipe, nama, keterangan, jumlah, kasir, kategori_id, tgl_update, tgl_input, student_id, period_id, bebas_id) VALUES ('in', '$nama', '$ket', '$jml', '$user', '$kate', '$tgl', '$now', 0, 0, 0)";
 
         if (mysqli_query($conn, $sql)) {
             echo "<script type='text/javascript'>window.location = '$forwardpage?insert=true';</script>";
         } else {
             // Untuk debugging, Anda bisa menampilkan error SQL
-            // echo "Error: " . mysqli_error($conn);
-            echo "<script type='text/javascript'>window.location = '$forwardpage?insert=false';</script>";
+            echo "Error: " . mysqli_error($conn); // <-- Tetap aktifkan ini untuk debugging lebih lanjut
+            // echo "<script type='text/javascript'>window.location = '$forwardpage?insert=false';</script>";
         }
         // } // Tutup if ($_SERVER["REQUEST_METHOD"] == "POST")
     }
